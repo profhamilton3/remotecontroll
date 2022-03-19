@@ -27,9 +27,19 @@ radio.setGroup(127)
 radio.setTransmitPower(7)
 radio.setTransmitSerialNumber(true)
 joystickbit.Vibration_Motor(500)
+let pY = joystickbit.getRockerValue(joystickbit.rockerType.Y)
+let pX = joystickbit.getRockerValue(joystickbit.rockerType.X)
 basic.showIcon(IconNames.SmallHeart)
 basic.forever(function () {
+    if (pX != joystickbit.getRockerValue(joystickbit.rockerType.X)) {
+        radio.sendValue("vx", joystickbit.getRockerValue(joystickbit.rockerType.X))
+        basic.pause(200)
+        pX = joystickbit.getRockerValue(joystickbit.rockerType.X)
+    }
+    if (pY != joystickbit.getRockerValue(joystickbit.rockerType.Y)) {
+        radio.sendValue("vy", joystickbit.getRockerValue(joystickbit.rockerType.Y))
+        basic.pause(200)
+        pY = joystickbit.getRockerValue(joystickbit.rockerType.Y)
+    }
     basic.pause(200)
-    radio.sendValue("vx", joystickbit.getRockerValue(joystickbit.rockerType.X))
-    radio.sendValue("vy", joystickbit.getRockerValue(joystickbit.rockerType.Y))
 })
