@@ -23,20 +23,22 @@ joystickbit.onButtonEvent(joystickbit.JoystickBitPin.P12, joystickbit.ButtonType
     basic.showArrow(ArrowNames.North)
 })
 joystickbit.initJoystickBit()
-radio.setGroup(127)
+radio.setGroup(1)
+radio.setFrequencyBand(16)
 radio.setTransmitPower(7)
-radio.setTransmitSerialNumber(true)
 joystickbit.Vibration_Motor(500)
-let pY = joystickbit.getRockerValue(joystickbit.rockerType.Y)
-let pX = joystickbit.getRockerValue(joystickbit.rockerType.X)
-basic.showIcon(IconNames.SmallHeart)
+let pY0 = joystickbit.getRockerValue(joystickbit.rockerType.Y)
+let pX0 = joystickbit.getRockerValue(joystickbit.rockerType.X)
+let pX = pX0
+let pY = pY0
+basic.showIcon(IconNames.Yes)
 basic.forever(function () {
-    if (pX != joystickbit.getRockerValue(joystickbit.rockerType.X)) {
+    if (Math.abs(joystickbit.getRockerValue(joystickbit.rockerType.X) - pX) > 50 && Math.abs(joystickbit.getRockerValue(joystickbit.rockerType.X) - pX0) > 50) {
         radio.sendValue("vx", joystickbit.getRockerValue(joystickbit.rockerType.X))
         basic.pause(200)
-        pX = joystickbit.getRockerValue(joystickbit.rockerType.X)
+        pX0 = joystickbit.getRockerValue(joystickbit.rockerType.X)
     }
-    if (pY != joystickbit.getRockerValue(joystickbit.rockerType.Y)) {
+    if (Math.abs(joystickbit.getRockerValue(joystickbit.rockerType.Y) - pY) > 50 && Math.abs(joystickbit.getRockerValue(joystickbit.rockerType.Y) - pY0) > 50) {
         radio.sendValue("vy", joystickbit.getRockerValue(joystickbit.rockerType.Y))
         basic.pause(200)
         pY = joystickbit.getRockerValue(joystickbit.rockerType.Y)
