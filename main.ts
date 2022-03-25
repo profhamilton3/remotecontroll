@@ -1,3 +1,7 @@
+radio.onReceivedNumber(function (receivedNumber) {
+    joystickbit.Vibration_Motor(100)
+    basic.showNumber(receivedNumber)
+})
 joystickbit.onButtonEvent(joystickbit.JoystickBitPin.P14, joystickbit.ButtonType.down, function () {
     radio.sendString("DN")
     basic.showArrow(ArrowNames.SouthEast)
@@ -35,7 +39,7 @@ let pY0 = joystickbit.getRockerValue(joystickbit.rockerType.Y)
 let pX0 = joystickbit.getRockerValue(joystickbit.rockerType.X)
 let pX = pX0
 let pY = pY0
-basic.showIcon(IconNames.SmallSquare)
+basic.showIcon(IconNames.Diamond)
 basic.forever(function () {
     if (Math.abs(joystickbit.getRockerValue(joystickbit.rockerType.X) - pX) > 50 && Math.abs(joystickbit.getRockerValue(joystickbit.rockerType.X) - pX0) > 50) {
         radio.sendValue("vx", joystickbit.getRockerValue(joystickbit.rockerType.X))
